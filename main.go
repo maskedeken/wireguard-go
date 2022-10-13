@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"runtime"
 	"strconv"
 	"syscall"
@@ -63,7 +64,7 @@ func main() {
 		return
 	}
 
-	warning()
+	// warning()
 
 	var foreground bool
 	var interfaceName string
@@ -203,7 +204,7 @@ func main() {
 			Env: env,
 		}
 
-		path, err := os.Executable()
+		path, err := filepath.Abs(os.Args[0])
 		if err != nil {
 			logger.Errorf("Failed to determine executable: %v", err)
 			os.Exit(ExitSetupFailed)
